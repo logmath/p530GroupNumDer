@@ -11,19 +11,34 @@ clc; clear; close all;
 
 f = @(x) sin(x); % function
 dfdx = @(x,h) (f(x+h) - f(x-h)) / (2*h); % derivative
+er = @(x,h) dfdx(x,h) - cos(x); % error
 
 x = linspace(-pi,pi,100); % domain
-h = 0.01; % step size
-er = dfdx(x,h) - cos(x); % error
+h = eps^(1/3); % step size
+hNR = eps^(1/3); % numerical recipies optimal step size
 
 figure()
 plot(x,dfdx(x,h),x,cos(x))
 xlabel('x')
 ylabel('y')
 figure()
-plot(x,er);
+plot(x,er(x,h));
 xlabel('x')
 ylabel('error')
+
+hs = logspace(0,-16,100);
+ers = zeros(size(hs)); % initialize
+for i = 1:length(hs)
+    ers(i) = norm(er(x,hs(i)));
+end
+figure()
+loglog(hs,ers)
+xlabel('step size, h')
+ylabel('error norm')
+xline(hNR)
+norm(er(x,hNR))
+% looks like using a step size of about 6.1 \times 10^{-6} gives the
+% minimum error with a norm of 1.01\times 10^{-10}
 %% Functions
 f1 = @(x) sin(x);
 f2 = @(x) sin(1./x);
