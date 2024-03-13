@@ -1,3 +1,8 @@
+function [y,dy] = DualDiff(f,x)
+% Input: f, the function to evaluate the value and the derivative. x is the
+% plotting range to evaluate over.
+% Output: y, the value of the function at x, dy the value of the derivative
+% of f at x.
 % This function will evaluate the derivative of a function using dual
 % numbers. I did not write the Dual class, I got it from a git repo but I
 % think that's within the scope of the assignment. 
@@ -7,15 +12,10 @@
 % are extra arguments
 % Author: Tyce Olaveson
 
-close all;
-
-x = linspace(-1,1); % plotting array
-
 z = Dual(x,x./x); % create the dual number
-
-ydual = f4(z);
-
+ydual = f(z);
 y = ydual.x;
 dy = ydual.d;
 
-plot(x,y,'r',x,dy,'b');
+% plot(x,y,'r',x,dy,'b');
+end
