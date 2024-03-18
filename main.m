@@ -65,7 +65,7 @@ methods = {'dual','richardson'}; % methods to use for the DerivativeDriver
 args = {{},{},{}}; % additional argumnets to use for each method
 for i = 1:length(funcs)
     f = funcs{i}; % current function
-    x = linspace(lims{i}(1),lims{i}(2),100); % x range for plotting
+    x = linspace(lims{i}(1),lims{i}(2),1000); % x range for plotting
     figure(i) % create the figure for plotting
     plot(x,f(x),'k','DisplayName','f(x)')
     hold on
