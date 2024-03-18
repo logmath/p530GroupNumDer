@@ -61,8 +61,8 @@ lims = {[-pi,pi],[-1,1],[3.13,3.16],[-1,1],[-3,3]}; % the specified limits for t
 % at the specified points. How do your methods far in terms of accuracy and
 % computaiton time?
 
-methods = {'dual','richardson'}; % methods to use for the DerivativeDriver
-args = {{},{},{}}; % additional argumnets to use for each method
+methods = {'dual','richardson','cheb'}; % methods to use for the DerivativeDriver
+args = {{},{},{10}}; % additional argumnets to use for each method
 for i = 1:length(funcs)
     f = funcs{i}; % current function
     x = linspace(lims{i}(1),lims{i}(2),1000); % x range for plotting

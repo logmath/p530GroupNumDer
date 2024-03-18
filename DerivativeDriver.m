@@ -10,12 +10,14 @@ try
             [y,df] = DualDiff(f,x);
         case {'richextrap','richardson'}
             [df,y] = richExtrapDiff(f,x,args{:});
+        case {'cheb'}
+            [df,y] = chebyshevDir(f,x,args{:});
         otherwise
             disp("Undefined derivative method")
     end
 
 catch
-    warning(sprintf("Failed to calculate the derivative of %s using %s",func2str(f)),method)
+    warning(strcat(sprintf("Failed to calculate the derivative of %s using ",func2str(f)),string(method)))
     df = nan(size(x));
     y = f(x);
 end
